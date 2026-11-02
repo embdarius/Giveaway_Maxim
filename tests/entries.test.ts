@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { campaign, campaignStatus, countdownParts } from "../src/lib/campaign";
 import { entrySchema, normalizePhone } from "../src/lib/validation";
 import {
@@ -124,7 +124,6 @@ describe("registration service", () => {
     expect(result.status).toBe(503);
     expect(result.body.ok).toBe(false);
     expect(deps.store).not.toHaveBeenCalled();
-    expect(productionDependencies().ready).toBe(false);
   });
   it("rejects expired and not-yet-open requests", async () => {
     for (const now of [
@@ -185,5 +184,40 @@ describe("registration service", () => {
         )
       ).status,
     ).toBe(503);
+  });
+});
+
+describe("production configuration", () => {
+  afterEach(() => vi.unstubAllEnvs());
+
+  function configureStorage() {
+    vi.stubEnv("SUPABASE_URL", "https://example.supabase.co");
+    vi.stubEnv("SUPABASE_SECRET_KEY", "test-server-key");
+    vi.stubEnv("RATE_LIMIT_SECRET", "a".repeat(64));
+  }
+
+  it("allows a configured registration while legal documents are still drafts", () => {
+    configureStorage();
+    vi.stubEnv("LEGAL_DOCUMENTS_APPROVED", "false");
+    for (const key of [
+      "ORGANIZER_NAME",
+      "ORGANIZER_ADDRESS",
+      "ORGANIZER_CONTACT_EMAIL",
+      "DATA_RETENTION_DESCRIPTION",
+    ]) vi.stubEnv(key, "");
+    expect(productionDependencies().ready).toBe(true);
+  });
+
+  it("requires all server credentials regardless of document status", () => {
+    configureStorage();
+    vi.stubEnv("LEGAL_DOCUMENTS_APPROVED", "true");
+    vi.stubEnv("SUPABASE_SECRET_KEY", "");
+    expect(productionDependencies().ready).toBe(false);
+  });
+
+  it("does not enable registration with an unsafe rate-limit secret", () => {
+    configureStorage();
+    vi.stubEnv("RATE_LIMIT_SECRET", "short");
+    expect(productionDependencies().ready).toBe(false);
   });
 });

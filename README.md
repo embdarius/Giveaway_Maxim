@@ -30,7 +30,7 @@ node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"
 - Editează `src/lib/campaign.ts`: textul final al premiului, versiunile documentelor și, dacă e nevoie, intervalul. Deadline exclusiv: `2026-12-03T00:00:00+02:00`, adică participare inclusiv pe 2 decembrie până la 23:59, ora României.
 - Completează toate valorile `[De completat]` din `src/content/legal.ts`. Verifică textele din `/regulament` și `/confidentialitate`, inclusiv configurația furnizorilor și transferurile de date. Textele inițiale sunt șabloane provizorii, nu documente juridice finalizate.
 - Completează `ORGANIZER_NAME`, `ORGANIZER_ADDRESS`, `ORGANIZER_CONTACT_EMAIL`, `DATA_RETENTION_DESCRIPTION`.
-- Setează `LEGAL_DOCUMENTS_APPROVED=true` numai după confirmarea documentelor. Aplicația verifică și dacă au fost înlocuite toate marcajele `[De completat]` din configurație.
+- Setează `LEGAL_DOCUMENTS_APPROVED=true` numai după confirmarea documentelor. Acest indicator și câmpurile organizatorului controlează marcarea documentelor ca finale; nu blochează conectarea formularului la baza de date. Înscrierile funcționează când cele trei secrete server sunt configurate și campania este activă în Supabase.
 - Activează campania în Supabase numai când ești gata să primești înscrieri:
 
 ```sql
@@ -40,6 +40,8 @@ where id = 'la-maxim-2026';
 ```
 
 Dacă schimbi intervalul sau versiunile documentelor în cod, actualizează și `giveaway_campaigns` cu aceleași valori. Baza de date verifică independent perioada, activarea și versiunile documentelor. Pentru oprire imediată setează `enabled=false`.
+
+Mesajul „Înscrierile nu sunt disponibile încă” indică lipsa configurării server (`SUPABASE_URL`, `SUPABASE_SECRET_KEY`, `RATE_LIMIT_SECRET` de minimum 32 de caractere) sau o campanie dezactivată. Pe Vercel, variabilele trebuie adăugate în proiect și urmate de redeploy; `.env.local` nu este trimis în GitHub.
 
 ## Publicare pe Vercel
 

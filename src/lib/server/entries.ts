@@ -7,7 +7,6 @@ import {
   type FieldErrors,
   type EntryField,
 } from "../validation";
-import { legalDocumentsReady } from "../../content/legal";
 
 type Result = { status: number; body: EntryResponse; retryAfter?: number };
 export type RegistrationInput = {
@@ -164,9 +163,7 @@ export function productionDependencies(): RegistrationDependencies {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SECRET_KEY;
   const secret = process.env.RATE_LIMIT_SECRET;
-  const ready = Boolean(
-    url && key && secret && secret.length >= 32 && legalDocumentsReady(),
-  );
+  const ready = Boolean(url && key && secret && secret.length >= 32);
   return {
     now: Date.now,
     ready,
