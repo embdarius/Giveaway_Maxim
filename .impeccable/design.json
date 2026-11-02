@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-02T14:48:09.626Z",
+  "title": "Design System: La MAXIM",
+  "extensions": {
+    "colorMeta": {
+      "forest": {
+        "role": "primary",
+        "displayName": "Verde pădure",
+        "canonical": "#203e35",
+        "tonalRamp": [
+          "#0f211b",
+          "#173027",
+          "#203e35",
+          "#426152",
+          "#748d7d",
+          "#a4b5a6",
+          "#d4ded0",
+          "#f0f3ec"
+        ]
+      },
+      "copper": {
+        "role": "secondary",
+        "displayName": "Cupru discret",
+        "canonical": "#946445",
+        "tonalRamp": [
+          "#2c1a10",
+          "#51331e",
+          "#754b30",
+          "#946445",
+          "#b48b6a",
+          "#ceb49c",
+          "#e7d7c6",
+          "#f5eee4"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Invitație",
+        "purpose": "Titluri principale și accente cursive."
+      },
+      "body": {
+        "displayName": "Formular",
+        "purpose": "Text lizibil și controale."
+      }
+    },
+    "shadows": [
+      {
+        "name": "button-hover",
+        "value": "0 6px 16px #203e3518",
+        "purpose": "Doar la hover pe acțiunea principală."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Intrarea fotografiei și tranziții discrete."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "760px"
+      },
+      {
+        "name": "tablet",
+        "value": "1150px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Înscriere",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Acțiunea unică de participare.",
+      "html": "<button class=\"ds-button\">Înscrie-mă la giveaway <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 12h14m-7-7 7 7-7 7\"/></svg></button>",
+      "css": ".ds-button{display:flex;justify-content:space-between;gap:32px;width:100%;padding:17px 20px;border:0;border-radius:2px;background:#203e35;color:#fffefa;font:500 12px Manrope,sans-serif;cursor:pointer;transition:background .22s,box-shadow .22s}.ds-button:hover{background:#2d5145;box-shadow:0 6px 16px #203e3518}.ds-button:focus-visible{outline:2px solid #946445;outline-offset:5px}"
+    },
+    {
+      "name": "Câmp de nume",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Etichetă permanentă și contur lizibil.",
+      "html": "<label class=\"ds-field\">Nume<input placeholder=\"Numele tău\" autocomplete=\"family-name\"></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:8px;color:#203e35;font:600 12px Manrope,sans-serif}.ds-field input{height:44px;padding:0 13px;border:1px solid #7c8a74;border-radius:2px;background:transparent;color:#203e35;font:400 13px Manrope,sans-serif}.ds-field input::placeholder{color:#626b60}.ds-field input:focus-visible{outline:2px solid #946445;outline-offset:5px;background:#fffefa}"
+    },
+    {
+      "name": "Marcă",
+      "kind": "nav",
+      "description": "Legătura simplă către începutul paginii.",
+      "html": "<a class=\"ds-brand\" href=\"#\"><i>La</i> MAXIM</a>",
+      "css": ".ds-brand{color:#203e35;text-decoration:none;font:600 19px Manrope,sans-serif;letter-spacing:.13em}.ds-brand i{font:italic 28px \"Cormorant Garamond\",Georgia,serif;letter-spacing:-.03em;margin-right:3px}.ds-brand:focus-visible{outline:2px solid #946445;outline-offset:5px}"
+    },
+    {
+      "name": "Timp rămas",
+      "kind": "custom",
+      "description": "Countdown tipografic; cifre demonstrative în această mostră.",
+      "html": "<div class=\"ds-timer\"><span>30<small>zile</small></span><span>07<small>ore</small></span><span>20<small>minute</small></span><span>00<small>secunde</small></span></div>",
+      "css": ".ds-timer{display:flex;gap:25px;color:#203e35}.ds-timer span{font:400 39px \"Cormorant Garamond\",Georgia,serif;font-variant-numeric:tabular-nums}.ds-timer small{display:block;color:#626b60;font:400 9px Manrope,sans-serif;margin-top:5px}"
+    },
+    {
+      "name": "Confirmare document",
+      "kind": "custom",
+      "description": "Etichetă și bifă cu legătură vizibilă.",
+      "html": "<label class=\"ds-consent\"><input type=\"checkbox\">Am citit și accept regulamentul.</label>",
+      "css": ".ds-consent{display:flex;align-items:center;gap:9px;color:#626b60;font:400 11px Manrope,sans-serif}.ds-consent input{accent-color:#203e35;width:16px;height:16px}.ds-consent input:focus-visible{outline:2px solid #946445;outline-offset:5px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "O invitație personală",
+    "overview": "O compoziție calmă și primitoare. Fotografiile reale ale locației oferă atmosfera, iar tipografia și spațiul liber păstrează atenția asupra înscrierii. Direcția a fost aprobată de utilizator înainte de implementare, cu construire directă în React.",
+    "keyCharacteristics": [
+      "Titluri serif cu accente cursive de cupru.",
+      "Fundal fildeș, text verde închis și suprafețe plate.",
+      "Fotografii pătrate, texte precise și un singur obiectiv de participare."
+    ],
+    "rules": [
+      {
+        "name": "The Readable Ink Rule",
+        "body": "Textul secundar folosește Muted Forest; nu se estompează prin opacitate.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Folosește fotografiile reale și păstrează atmosfera lor.",
+      "Păstrează contrastul textului secundar și al placeholder-elor.",
+      "Folosește serif pentru voce și sans pentru completarea formularului."
+    ],
+    "donts": [
+      "Nu inventa servicii, recenzii sau numere de participanți.",
+      "Nu schimba cadrele fotografiilor în bannere panoramice.",
+      "Nu adăuga scopuri concurente formularului de participare."
+    ]
+  }
+}
